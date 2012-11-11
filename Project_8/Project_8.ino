@@ -1,3 +1,11 @@
+#include <Wire.h>
+
+const int RED = 9;
+const int GREEN = 10;
+const int BLUE = 11;
+
+int r, g, b;
+
 const int OUT_A = 2;
 const int OUT_B = 3;
 const int OUT_C = 4;
@@ -30,6 +38,10 @@ void setup()
    pinMode(OUT_E, OUTPUT);
    pinMode(OUT_F, OUTPUT);
    pinMode(OUT_G, OUTPUT);
+   pinMode(RED, OUTPUT);
+   pinMode(GREEN, OUTPUT);
+   pinMode(BLUE, OUTPUT);
+   Wire.begin();
 }
 
 void loop()
@@ -37,6 +49,16 @@ void loop()
    int sensorValue = analogRead(POT_IN);
    int scaled = map(sensorValue, 0, 1023, 0, 9);
    writeDigit(scaled);
+   scaled = map(sensorValue, 0, 1023, 0, 768);
+   Wheel(scaled);
+   analogWrite(RED, r);
+   analogWrite(GREEN, g);
+   analogWrite(BLUE, b);
+   Wire.beginTransmission(4);
+   Wire.write((byte)r);
+   Wire.write((byte)g);
+   Wire.write((byte)b);
+   Wire.endTransmission();
    delay(50);
 }
 
@@ -112,3 +134,27 @@ void activateSegment(int i)
       }
    }
 }
+
+void Wheel(uint16_t WheelPos)
+{
+  switch(WheelPos / 256)
+  {
+    case 0:
+      r = 255 - WheelPos % 256;   //Red down
+      g = WheelPos % 256;      // Green up
+      b = 0;                  //blue off
+      break; 
+    case 1:
+      g = 255 - WheelPos % 256;  //green down
+      b = WheelPos % 256;      //blue up
+      r = 0;                  //red off
+      break; 
+    case 2:
+      b = 255 - WheelPos % 256;  //blue down 
+      r = WheelPos % 256;      //red up
+      g = 0;                  //green off
+      break; 
+  }
+}
+
+

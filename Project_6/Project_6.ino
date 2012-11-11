@@ -6,8 +6,6 @@ const int OUT_E = 6;
 const int OUT_F = 7;
 const int OUT_G = 8;
 
-const int POT_IN = A0;
-
 int digit_segments[10][7] = {
    {1, 1, 1, 1, 1, 1, 0},		// This is digit 0, as per the table
    {0, 1, 1, 0, 0, 0, 0},		// Digit 1
@@ -34,10 +32,26 @@ void setup()
 
 void loop()
 {
-   int sensorValue = analogRead(POT_IN);
-   int scaled = map(sensorValue, 0, 1023, 0, 9);
-   writeDigit(scaled);
-   delay(50);
+   writeDigit(0);
+   delay(1000);
+   writeDigit(1);
+   delay(1000);
+   writeDigit(2);
+   delay(1000);
+   writeDigit(3);
+   delay(1000);
+   writeDigit(4);
+   delay(1000);
+   writeDigit(5);
+   delay(1000);
+   writeDigit(6);
+   delay(1000);
+   writeDigit(7);
+   delay(1000);
+   writeDigit(8);
+   delay(1000);
+   writeDigit(9);
+   delay(1000);
 }
 
 
