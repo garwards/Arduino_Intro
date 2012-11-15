@@ -32,26 +32,11 @@ void setup()
 
 void loop()
 {
-   writeDigit(0);
-   delay(1000);
-   writeDigit(1);
-   delay(1000);
-   writeDigit(2);
-   delay(1000);
-   writeDigit(3);
-   delay(1000);
-   writeDigit(4);
-   delay(1000);
-   writeDigit(5);
-   delay(1000);
-   writeDigit(6);
-   delay(1000);
-   writeDigit(7);
-   delay(1000);
-   writeDigit(8);
-   delay(1000);
-   writeDigit(9);
-   delay(1000);
+   for (int i = 0; i < 10; i++)
+   {
+      writeDigit(i);
+      delay(1000);
+   }
 }
 
 
